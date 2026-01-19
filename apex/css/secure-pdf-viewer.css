@@ -1,0 +1,227 @@
+/**
+ * Secure PDF Viewer Styles
+ * For Oracle APEX Application
+ */
+
+/* Main wrapper */
+.secure-pdf-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 600px;
+    background-color: #525659;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Toolbar */
+.pdf-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background-color: #323639;
+    border-bottom: 1px solid #444;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Buttons */
+.pdf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background-color: #484c50;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.pdf-btn:hover:not(:disabled) {
+    background-color: #5a5f63;
+}
+
+.pdf-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pdf-btn span {
+    font-size: 14px;
+}
+
+/* Page info */
+.page-info {
+    color: #fff;
+    font-size: 14px;
+    padding: 0 10px;
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Zoom level */
+.zoom-level {
+    color: #fff;
+    font-size: 13px;
+    min-width: 50px;
+    text-align: center;
+}
+
+/* Canvas container */
+.pdf-canvas-container {
+    position: relative;
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Canvas */
+#pdf-canvas {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    max-width: 100%;
+    /* Prevent text selection and dragging */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: auto;
+}
+
+/* Loading overlay */
+.pdf-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(50, 54, 57, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.loading-spinner {
+    text-align: center;
+    color: #fff;
+}
+
+.loading-spinner p {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/* Error state */
+.pdf-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    color: #ff6b6b;
+    text-align: center;
+}
+
+.pdf-error p {
+    margin-top: 15px;
+    font-size: 16px;
+}
+
+/* Watermark overlay */
+.pdf-watermark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.pdf-watermark span {
+    font-size: 48px;
+    font-weight: bold;
+    color: rgba(128, 128, 128, 0.15);
+    transform: rotate(-30deg);
+    letter-spacing: 10px;
+    white-space: nowrap;
+}
+
+/* Fullscreen mode */
+.secure-pdf-wrapper:fullscreen {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.secure-pdf-wrapper:fullscreen .pdf-canvas-container {
+    height: calc(100vh - 60px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .pdf-toolbar {
+        justify-content: center;
+    }
+
+    .toolbar-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .secure-pdf-wrapper {
+        min-height: 400px;
+    }
+
+    .pdf-watermark span {
+        font-size: 24px;
+    }
+}
+
+/* Print protection - hide content when printing */
+@media print {
+    .secure-pdf-wrapper {
+        display: none !important;
+    }
+
+    body::after {
+        content: "Printing is not allowed for this document.";
+        display: block;
+        font-size: 24px;
+        text-align: center;
+        padding: 50px;
+    }
+}
+
+/* Additional security styles */
+.secure-pdf-wrapper * {
+    -webkit-touch-callout: none;
+}
+
+/* Disable selection highlight */
+.secure-pdf-wrapper ::selection {
+    background: transparent;
+}
+
+.secure-pdf-wrapper ::-moz-selection {
+    background: transparent;
+}
